@@ -3,7 +3,7 @@
 }
 
 bodyv {
-    background-color: #578d25;
+    background-color: #3b3b98;
     color: #fff;
     font-family: 'Muli', sans-serif;
     display: flex;
@@ -22,7 +22,7 @@ h2 {
 }
 
 .container {
-    background-color: #578d25;
+    background-color: #23235b;
     box-shadow: 0px 2px 10px rbga(255, 255, 255, 0.2);
     width: 350px;
     padding: 20px;
@@ -58,7 +58,7 @@ h2 {
 
 .btn {
     border: none;
-    background-color: #578d25;
+    background-color: #3b3b98;
     color: #fff;
     font-size: 16px;
     padding: 8px 12px;
