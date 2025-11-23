@@ -15,6 +15,20 @@ const randomFunc = {
     symbol: getRandomSymbol
 }
 
+clipboardEl.addEventListener('click', () => {
+    const textarea = document.createElement('textarea')
+    const password = resultEl.innerText
+
+    if(!password) { return }
+
+    textarea.value = password
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('copy')
+    textarea.remove()
+    alert('Password copied to clipboard')
+})
+
 generateEl.addEventListener('click', () => {
     const length = +lengthEl.value
     const hasLower = lowercaseEl.checked
@@ -22,7 +36,24 @@ generateEl.addEventListener('click', () => {
     const hasNumber = numbersEl.checked
     const hasSymbol = symbolsEl.checked
 
-    resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length)
+    //generate password
+    const generatedPassword = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length)
+    resultEl.innerText = generatedPassword
+
+    //Update strength indicator
+    const strengthEl = document.getElementById('strength');
+    const strengthValue = calculatestrength(generatedPassword);
+
+    strengthEl.teztContent = strengthValue
+    strengthEl.className = '' //this removes old class
+
+    if (strengthValue === 'Weak') {
+        strengthEl.classList.add('strength-weak');
+    } else if (strengthValue === 'Medium') {
+        strengthEl.classList.add('strength-medium');
+    } else if (strengthValue === 'Strong') {
+        strengthEl.classList.add('strength-strong');
+    }
 })
 
 function generatePassword(lower, upper, number, symbol, length) {
@@ -64,3 +95,21 @@ function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)]
 }
 
+function calculatestrength(password) {
+    let strength = 0;
+
+    //check the character types
+    if (/[a-z]/.test(password)) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+    //check length
+    if (password.length >= 12) strength++;
+    else if (password.length >= 8) strength+= 0.5;
+
+    //determine strength label
+    if (strength <= 2) return "Weak";
+    else if (strength <= 3.5) return "Medium";
+    else return "Strong";
+}
