@@ -22,12 +22,13 @@ A simple and customizable password generator that creates secure, random passwor
 
                     - Instant password copy-to-clipboard 
 
-                                                                  How It Works
+                                                          
+                                                          How It Works
 
 The Password Generator assembles a pool of characters based on user-selected options. It then randomly selects characters until reaching the desired length, ensuring randomness and security.
 
 
-                                                                    Usage
+                                                            Usage
 Example:
 
 When you start the generator, you may be prompted like this:
